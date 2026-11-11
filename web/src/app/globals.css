@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+/* BANZA Photography design tokens, taken from their own materials: black and chrome (the logo),
+   deep maroon (their info cards), warm gold (their quotation). */
+@theme {
+  --color-ink: #08080a;
+  --color-night: #0e0e12;
+  --color-graphite: #17171c;
+  --color-smoke: #24242b;
+  --color-chrome: #f2f2f5;
+  --color-chrome-2: #c9c9d1;
+  --color-chrome-3: #8d8d97;
+  --color-mute: #6b6b74;
+  --color-maroon: #6e0f18;
+  --color-maroon-hi: #9e1b28;
+  --color-gold: #c9a45e;
+  --color-gold-soft: #e7d3a2;
+  --color-ok: #3ccf8e;
+  --color-warn: #f2b33d;
+  --color-bad: #ff6b6b;
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-display: var(--font-cinzel), var(--font-cormorant), Georgia, serif;
+  --font-script: var(--font-pinyon), cursive;
+
+  --ease-glass: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+:root { color-scheme: dark; }
+html { background: var(--color-ink); -webkit-text-size-adjust: 100%; }
+body { background: var(--color-ink); color: var(--color-chrome); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+::selection { background: var(--color-maroon-hi); color: #fff; }
+:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 6px; }
+
+/* Component classes live in the components layer so utilities (sticky, absolute…) can override them. */
+@layer components {
+/* ── Liquid glass ─────────────────────────────────────────────────────────────
+   A translucent, slightly brightening material: backdrop blur + saturation, a soft tinted fill,
+   a bright specular rim on top and a faint inner edge below, and a light highlight that follows
+   the pointer (--gx/--gy, set by <GlassPointer>). Chromium also bends what's behind it through the
+   SVG filter #lg-refract (in <LiquidDefs>); everywhere else it is clean frosted glass. */
+.glass {
+  --glass-tint: rgba(255, 255, 255, 0.07);
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03) 42%, rgba(255, 255, 255, 0.06)), var(--glass-tint);
+  -webkit-backdrop-filter: blur(22px) saturate(170%) brightness(1.05);
+  backdrop-filter: blur(22px) saturate(170%) brightness(1.05);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.06),
+    0 18px 50px -18px rgba(0, 0, 0, 0.65);
+}
+.glass::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+  background: radial-gradient(120px 80px at var(--gx, 30%) var(--gy, 0%), rgba(255, 255, 255, 0.22), transparent 70%);
+  opacity: 0.9; transition: opacity 0.3s var(--ease-glass);
+}
+.glass::after {
+  /* specular streak along the top edge, like light catching a lens */
+  content: '';
+  position: absolute; left: 12%; right: 12%; top: 0; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  opacity: 0.55;
+}
+@supports (backdrop-filter: url(#lg-refract)) and (not (-webkit-touch-callout: none)) {
+  .glass.refract { backdrop-filter: url(#lg-refract) blur(18px) saturate(175%) brightness(1.06); }
+}
+.glass-strong { --glass-tint: rgba(18, 18, 24, 0.55); }
+.glass-maroon { --glass-tint: rgba(110, 15, 24, 0.42); border-color: rgba(255, 170, 170, 0.22); }
+.glass-gold { --glass-tint: rgba(201, 164, 94, 0.2); border-color: rgba(231, 211, 162, 0.35); }
+
+/* Chrome text: the logo's metal, as a gradient on type. */
+.chrome-text {
+  background: linear-gradient(180deg, #ffffff 0%, #d9d9df 38%, #8e8e98 52%, #e9e9ee 68%, #b4b4bd 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.gold-text {
+  background: linear-gradient(180deg, #f3e2b8 0%, #c9a45e 55%, #a7823e 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; min-height: 52px; padding: 0 1.4rem; border-radius: 999px; font-weight: 600; font-size: 0.98rem; letter-spacing: 0.01em; transition: transform 0.25s var(--ease-glass), background 0.25s, box-shadow 0.25s, border-color 0.25s; -webkit-tap-highlight-color: transparent; white-space: nowrap; }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: linear-gradient(180deg, #ffffff, #d7d7dd); color: #0b0b0e; box-shadow: inset 0 1px 0 #fff, 0 10px 30px -10px rgba(255, 255, 255, 0.35); }
+.btn-primary:hover { box-shadow: inset 0 1px 0 #fff, 0 14px 40px -12px rgba(255, 255, 255, 0.5); }
+.btn-maroon { background: linear-gradient(180deg, #a81f2c, #6e0f18); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 12px 32px -12px rgba(158, 27, 40, 0.7); }
+.btn-glass { color: #fff; }
+.btn[disabled] { opacity: 0.45; pointer-events: none; }
+
+/* Inputs: glass fields */
+.field { width: 100%; min-height: 52px; border-radius: 16px; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.14); color: #fff; font-size: 16px; outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; }
+.field::placeholder { color: rgba(255, 255, 255, 0.38); }
+.field:focus { border-color: rgba(231, 211, 162, 0.7); background: rgba(255, 255, 255, 0.09); box-shadow: 0 0 0 4px rgba(201, 164, 94, 0.15); }
+textarea.field { min-height: 120px; resize: vertical; }
+select.field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, #c9c9d1 50%), linear-gradient(135deg, #c9c9d1 50%, transparent 50%); background-position: calc(100% - 22px) 52%, calc(100% - 16px) 52%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 2.5rem; }
+select.field option { background: #17171c; }
+.label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-chrome-3); margin-bottom: 0.5rem; }
+
+.eyebrow { font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-gold-soft); }
+.rule-gold { height: 1px; background: linear-gradient(90deg, transparent, rgba(201, 164, 94, 0.8), transparent); }
+
+}
+
+/* Reveal on scroll (pure CSS where supported; content is always visible otherwise). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(28px) scale(0.985); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+  }
+}
+
+/* Ken Burns for hero slides */
+@keyframes kenburns { from { transform: scale(1.12) translate3d(0, 1.5%, 0); } to { transform: scale(1.0) translate3d(0, 0, 0); } }
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+.skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.1), rgba(255,255,255,0.04)); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }
+
+/* iOS safe areas for the floating dock */
+.pb-safe { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+.no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }

@@ -1,0 +1,6 @@
+# Local development only (copy to .dev.vars): emails go to the outbox table.
+MAIL_TRANSPORT=outbox
+IP_SALT=local-salt
+SIGNING_SECRET=local-signing-secret
+API_PUBLIC_URL=http://localhost:4790
+SITE_URL=http://localhost:4791

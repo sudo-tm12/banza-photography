@@ -1,0 +1,18 @@
+{
+  "name": "banza-photography-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 4790 --local",
+    "db:local": "wrangler d1 migrations apply banza --local",
+    "db:remote": "wrangler d1 migrations apply banza --remote",
+    "typecheck": "tsc --noEmit",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261101.0",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.158.0"
+  }
+}

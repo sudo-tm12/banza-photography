@@ -1,0 +1,130 @@
+[
+ {
+  "id": "lilac-gown",
+  "category": "Matric farewell",
+  "alt": "Matric farewell portrait in a lilac beaded gown beside a classic car",
+  "focus": "50% 35%",
+  "w": 1178,
+  "h": 1280
+ },
+ {
+  "id": "emerald-gown",
+  "category": "Matric farewell",
+  "alt": "Matric farewell portrait in an emerald gown, looking back over her shoulder",
+  "focus": "50% 30%",
+  "w": 1132,
+  "h": 1600
+ },
+ {
+  "id": "emerald-story",
+  "category": "Matric farewell",
+  "alt": "Matric farewell story layout: three frames in an emerald gown",
+  "focus": "50% 40%",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "lilac-story",
+  "category": "Matric farewell",
+  "alt": "Matric farewell story layout: three frames in a lilac gown",
+  "focus": "50% 40%",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "blazer-portrait",
+  "category": "Portraits",
+  "alt": "Studio portrait in a checked blazer",
+  "focus": "50% 30%",
+  "w": 890,
+  "h": 1280
+ },
+ {
+  "id": "beanie-crouch",
+  "category": "Portraits",
+  "alt": "Outdoor lifestyle portrait in a knitted beanie",
+  "focus": "50% 35%",
+  "w": 1003,
+  "h": 1350
+ },
+ {
+  "id": "beanie-smile",
+  "category": "Portraits",
+  "alt": "Candid smiling portrait in a knitted beanie",
+  "focus": "50% 30%",
+  "w": 934,
+  "h": 1280
+ },
+ {
+  "id": "hands-detail",
+  "category": "Portraits",
+  "alt": "Detail shot of hands with gold bracelets",
+  "focus": "50% 50%",
+  "w": 1080,
+  "h": 1247
+ },
+ {
+  "id": "curbside-bw",
+  "category": "Street & editorial",
+  "alt": "Black-and-white street portrait seated on a curb",
+  "focus": "50% 45%",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "cap-bw",
+  "category": "Street & editorial",
+  "alt": "Black-and-white editorial portrait against a car, cap over the eyes",
+  "focus": "50% 40%",
+  "w": 1236,
+  "h": 1600
+ },
+ {
+  "id": "stay-patient",
+  "category": "Street & editorial",
+  "alt": "Editorial street frame by a hatchback, with a script overlay",
+  "focus": "50% 55%",
+  "w": 992,
+  "h": 1600
+ },
+ {
+  "id": "neon",
+  "category": "Street & editorial",
+  "alt": "Abstract night frame: a blue neon line on dark marble",
+  "focus": "50% 50%",
+  "w": 854,
+  "h": 1280
+ },
+ {
+  "id": "birthday-laugh",
+  "category": "Birthdays & events",
+  "alt": "Birthday celebrant laughing in a crown",
+  "focus": "50% 35%",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "birthday-cake",
+  "category": "Birthdays & events",
+  "alt": "Birthday cake topped with a jewelled crown",
+  "focus": "50% 45%",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "city-day",
+  "category": "City",
+  "alt": "Rooftops and mountains under a blue sky, film date stamp",
+  "focus": "50% 50%",
+  "w": 854,
+  "h": 1280
+ },
+ {
+  "id": "city-night",
+  "category": "City",
+  "alt": "City lights at night, film date stamp",
+  "focus": "50% 50%",
+  "w": 854,
+  "h": 1280
+ }
+]

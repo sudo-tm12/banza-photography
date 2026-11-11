@@ -1,0 +1,42 @@
+# BANZA Photography API (Cloudflare Worker + D1 + KV + Resend).
+#   Local:   npm run db:local && npm run dev      (emails land in the outbox table, see .dev.vars.example)
+#   Deploy:  npm run db:remote && npm run deploy
+#   Secrets (once, never in this file): npx wrangler secret put RESEND_API_KEY | IP_SALT | SIGNING_SECRET
+name = "banza-api"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+# Served at https://banza-api.tshedzawebdev.workers.dev until BANZA has its own domain
+# (then add: routes = [{ pattern = "api.<their-domain>", custom_domain = true }]).
+workers_dev = true
+
+[placement]
+mode = "smart"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "banza"
+database_id = "0f814965-482f-47d8-83de-4eba5b5eb115"
+migrations_dir = "migrations"
+
+# Model application photos (private; only served through short-lived signed links to the team).
+[[kv_namespaces]]
+binding = "PHOTOS"
+id = "ff6ec757a15444818ae497fe179b0b12"
+
+[vars]
+# The website (GitHub Pages now; add BANZA's own domain here when it's connected).
+ALLOWED_ORIGINS = "https://sudo-tm12.github.io,http://localhost:3000,http://localhost:4791"
+SITE_URL = "https://sudo-tm12.github.io/banza-photography"
+API_PUBLIC_URL = "https://banza-api.tshedzawebdev.workers.dev"
+# Sent through Resend from a verified domain; replies go to BANZA's Gmail.
+MAIL_FROM = "BANZA Photography <banza@tshedzawebdev.co.za>"
+MAIL_REPLY_TO = "banzaphotography@gmail.com"
+MAIL_TRANSPORT = "resend"
+# Always admins (the dashboard can add more): Mr Banza / the PA.
+ADMIN_EMAILS = "banzaphotography@gmail.com"
+
+[triggers]
+crons = ["0 5 * * *"]
+
+[observability]
+enabled = true
